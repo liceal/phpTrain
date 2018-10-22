@@ -16,6 +16,14 @@ echo '</br></br>';
 //提取指定表内容;
 $firstname = 'fred';
 $lastname  = 'fox';
-$query="INSERT INTO sqldemo1(name,email,point,regdate)VALUES('liceal测试','cs@qq.com',22,NOW())";
-mysqli_query($conn,$query);
+$name=$_POST['username'];
+$email=$_POST['useremail'];
+$point=$_POST['userpoint'];
+//echo $name;
+$query="INSERT INTO sqldemo1(name,email,point,regdate)VALUES('{$name}','{$email}','{$point}',NOW())";
+mysqli_query($conn,$query) or die('提交失败'.mysqli_error($conn));
+mysqli_close($conn);
+echo '<script>alert("提交成功！");history.back()</script>';
+
 ?>
+

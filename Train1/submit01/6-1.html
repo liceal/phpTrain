@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<script>
+    var xmlHttp;
+
+    function createXMLHttpRequest() {
+        if (window.ActiveXObject) {
+            xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
+        } else if (window.XMLHttpRequest) {
+            xmlHttp = new XMLHttpRequest();
+        }
+    }
+
+    function startRequest() {
+        createXMLHttpRequest();
+        xmlHttp.open("GET", "6-1.php", true);
+        xmlHttp.onreadystatechange = function() {
+            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                document.getElementById('target').innerHTML += xmlHttp.responseText;
+            }
+        }
+        xmlHttp.send(null);
+    }
+    startRequest();
+</script>
+<body>
+    <input type="button" value="开启传送门" onclick="startRequest()">
+    <br><br>
+    <form method="post" action="6-1.php">
+        姓名:<input type="text" name="name"/><br/>
+        成绩:<input type="text" name="point"/><br/>
+        <input type="submit" value="提交" onclick="startRequest()">
+    </form>
+    <div id="target"></div>
+</body>
+
+</html>
